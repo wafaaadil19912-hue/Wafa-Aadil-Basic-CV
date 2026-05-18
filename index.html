@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Wafa Aadil · Portfolio with Project Galleries</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', sans-serif;
+            color: #1a2c3e;
+            line-height: 1.45;
+            padding: 2rem 1.5rem;
+        }
+
+        .cv-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .cv-inner {
+            padding: 2.2rem 2.5rem;
+        }
+
+        /* header */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #e9eef3;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
+        }
+        .name-title h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1F4A6E, #2A7F6E);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.3rem;
+        }
+        .name-title p {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a627a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .contact-info {
+            text-align: right;
+            background: #f8fafd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 2rem;
+        }
+        .contact-info p {
+            font-size: 0.85rem;
+            margin: 0.2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            color: #2c3e50;
+        }
+        .contact-info i {
+            width: 1.2rem;
+            color: #2A7F6E;
+        }
+        @media (max-width: 700px) {
+            .cv-inner { padding: 1.5rem; }
+            .header { flex-direction: column; align-items: start; gap: 1rem; }
+            .contact-info { text-align: left; width: 100%; }
+            .contact-info p { justify-content: flex-start; }
+        }
+
+        .objective {
+            background: #f4f9fe;
+            padding: 1.2rem 1.6rem;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid #2A7F6E;
+        }
+        .objective h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 800px) {
+            .two-col-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2A7F6E;
+            padding-left: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .skill-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+        .skill-badge span {
+            background: #eef2f9;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e4663;
+        }
+
+        /* Project Cards Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #edf2f7;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+            border-color: #d0dfed;
+        }
+
+        /* Carousel container */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            background: #f5f9ff;
+            overflow: hidden;
+        }
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .carousel-slide img {
+            width: 100%;
+            flex-shrink: 0;
+            object-fit: cover;
+            height: 220px;
+            display: block;
+            background: #eef2f8;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s;
+            z-index: 2;
+        }
+        .carousel-btn:hover {
+            background: rgba(0,0,0,0.75);
+        }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+        .image-counter {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            z-index: 2;
+            font-weight: 500;
+        }
+        .project-content {
+            padding: 1.2rem 1.3rem 1.4rem;
+        }
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #dfe9f5;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            color: #1f5e6e;
+        }
+        .badge-upcoming {
+            background: #ffe6cf;
+            color: #c25b00;
+        }
+        .badge-ai {
+            background: #e0f0fe;
+            color: #0b5e7e;
+        }
+        .project-desc {
+            font-size: 0.87rem;
+            color: #2c475c;
+            line-height: 1.45;
+            margin: 0.5rem 0 0.7rem;
+        }
+        .tech-stack {
+            font-size: 0.73rem;
+            margin-top: 0.5rem;
+            color: #4f7a9e;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #6c86a3;
+            border-top: 1px solid #eef2f8;
+            padding-top: 1.2rem;
+        }
+        .academic-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .academic-list li {
+            margin-bottom: 0.7rem;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .academic-list li i {
+            color: #2A7F6E;
+            width: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="cv-container">
+    <div class="cv-inner">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="name-title">
+                <h1>Wafa Aadil</h1>
+                <p><i class="fas fa-laptop-code"></i> Software Engineering Student · Flutter & AI specialist</p>
+            </div>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Rawalpindi, Pakistan</p>
+                <p><i class="fas fa-phone-alt"></i> +92 320 3439462  |  +92 323 3439462</p>
+                <p><i class="fas fa-envelope"></i> wafaaadil19912@gmail.com</p>
+            </div>
+        </div>
+
+        <!-- OBJECTIVE -->
+        <div class="objective">
+            <h3><i class="fas fa-bullseye"></i> Objective</h3>
+            <p>Motivated Software Engineering student with hands-on experience in Flutter, Firebase, and AI-integrated mobile applications. Skilled in building responsive apps, database systems, and user-centric digital products. Passionate about AI-powered solutions and delivering elegant, high-performance mobile experiences.</p>
+        </div>
+
+        <!-- SKILLS + EDUCATION -->
+        <div class="two-col-grid">
+            <div>
+                <div class="info-card">
+                    <div class="section-title"><i class="fas fa-code"></i> Technical Skills</div>
+                    <div><div style="font-weight: 600; margin-bottom: 0.5rem;">Mobile & Software</div><div class="skill-badge"><span>Flutter & Dart</span><span>Firebase</span><span>REST APIs</span><span>OOP</span><span>SQL</span></div></div>
+                    <div style="margin-top: 1rem;"><div style="font-weight: 600; margin-bottom: 0.5rem;">Tools</div><div class="skill-badge"><span>VS Code</span><span>Git</span><span>Android Studio</span></div></div>
+                    <div style="margin-top: 1rem;"><div style="font-weight: 600; margin-bottom: 0.5rem;">Soft Skills</div><div class="skill-badge"><span>Problem Solving</span><span>Teamwork</span><span>Communication</span><span>Adaptability</span></div></div>
+                </div>
+                <div class="info-card" style="margin-top: 1.5rem;">
+                    <div class="section-title"><i class="fas fa-graduation-cap"></i> Education</div>
+                    <ul class="academic-list">
+                        <li><i class="fas fa-university"></i> <strong>Riphah International University</strong> — BSSE (2027 expected)</li>
+                        <li><i class="fas fa-school"></i> <strong>Fazala Inter College</strong> — ICS (2021–2023)</li>
+                        <li><i class="fas fa-book"></i> <strong>Fazala International School</strong> — Matriculation (2019–2021)</li>
+                    </ul>
+                    <div class="section-title" style="margin-top: 1rem;"><i class="fas fa-certificate"></i> Certifications</div>
+                    <div class="skill-badge"><span>Mobile App Dev</span><span>Freelancing</span><span>Communication Skills</span><span>Graphic Designing</span><span>Business Analytics</span></div>
+                </div>
+            </div>
+            <div>
+                <div class="info-card">
+                    <div class="section-title"><i class="fas fa-rocket"></i> Core Competencies</div>
+                    <div class="skill-badge"><span>AI-integrated apps</span><span>Flutter widgets</span><span>Firebase backend</span><span>UI/UX</span><span>Startup mindset</span></div>
+                    <hr><i class="fas fa-heart" style="color:#2A7F6E;"></i> <strong>Passion:</strong> AI-powered mobile solutions, smart assistants, and innovative digital products.
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS WITH MULTI-IMAGE CAROUSELS -->
+        <div class="section-title" style="margin-top: 0.5rem;"><i class="fas fa-mobile-alt"></i> Featured Mobile Projects</div>
+        <div class="projects-grid" id="projectsGrid"></div>
+
+        <!-- Academic projects (text) -->
+        <div class="section-title" style="margin-top: 0.2rem;"><i class="fas fa-laptop"></i> Academic & System Projects</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="background:#F9FCFE; padding:0.8rem; border-radius:1rem;"><div style="font-weight:700;">🔐 Smart Door Lock System</div><div style="font-size:0.8rem;">Digital logic secure access control.</div></div>
+            <div style="background:#F9FCFE; padding:0.8rem; border-radius:1rem;"><div style="font-weight:700;">🌿 Perfume Brand Website</div><div style="font-size:0.8rem;">Responsive brand showcase.</div></div>
+            <div style="background:#F9FCFE; padding:0.8rem; border-radius:1rem;"><div style="font-weight:700;">🏫 School Management System</div><div style="font-size:0.8rem;">DBMS for student records & attendance.</div></div>
+            <div style="background:#F9FCFE; padding:0.8rem; border-radius:1rem;"><div style="font-weight:700;">📊 UML & System Analysis</div><div style="font-size:0.8rem;">Class, sequence, activity diagrams.</div></div>
+        </div>
+
+        <div class="footer-note">
+            <i class="fas fa-file-alt"></i> References available upon request · Open to internships & collaboration<br>
+            Flutter · Dart · AI integration · Firebase
+        </div>
+    </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightboxImg" src="" alt="Enlarged view">
+</div>
+
+<script>
+    // Project data with image counts and naming patterns
+    const projects = [
+        {
+            title: "💰 Expense Tracker App",
+            desc: "Manages daily income & expenses with visual reports, budget analytics, and transaction history. 7 detailed screens showcasing charts, add-expense flow, and insights.",
+            tech: "<i class='fab fa-flutter'></i> Flutter · <i class='fas fa-database'></i> SQLite · GetX",
+            badgeText: null,
+            badgeClass: "",
+            imageBase: "expense",
+            imageCount: 7,
+            ext: "jpg"
+        },
+        {
+            title: "🤖 Programming AI Assistant",
+            desc: "AI-powered coding assistant answering programming queries, generating snippets, and debugging help. Integrated with Gemini API.",
+            tech: "<i class='fab fa-flutter'></i> Flutter · <i class='fas fa-brain'></i> Gemini API · REST",
+            badgeText: null,
+            badgeClass: "",
+            imageBase: "ai-assist",
+            imageCount: 1,
+            ext: "jpg"
+        },
+        {
+            title: "🏋️ AI Fitness Tracker",
+            desc: "Personalized workout & fitness plans based on user goals, progress tracking, and AI-generated routines. Includes 7 screens for dashboard, exercises, and analytics.",
+            tech: "<i class='fab fa-flutter'></i> Flutter · AI models · Firebase Auth",
+            badgeText: "Ongoing",
+            badgeClass: "badge",
+            imageBase: "fitness",
+            imageCount: 7,
+            ext: "jpg"
+        },
+        {
+            title: "✨ Quote Collector (AI + Firebase)",
+            desc: "AI sentiment analysis to recommend quotes by mood, real-time Firestore sync, user collections, and smart suggestions. Complete backend integration with 6 UI screens.",
+            tech: "<i class='fab fa-flutter'></i> Flutter · Firebase (Auth/Firestore) · TensorFlow Lite",
+            badgeText: "AI + Firebase",
+            badgeClass: "badge-ai",
+            imageBase: "quote",
+            imageCount: 6,
+            ext: "jpg"
+        },
+        {
+            title: "✈️ Trip Planner",
+            desc: "AI-powered destination recommendations, dynamic itinerary generation, budget tracking, route optimization. Upcoming with multiple planning screens.",
+            tech: "<i class='fab fa-flutter'></i> Flutter · Firebase · Maps SDK · AI APIs",
+            badgeText: "Upcoming",
+            badgeClass: "badge-upcoming",
+            imageBase: "trip",
+            imageCount: 1,
+            ext: "jpg"
+        }
+    ];
+
+    // Helper: Build image URL array
+    function getImageUrls(base, count, ext) {
+        let urls = [];
+        for (let i = 1; i <= count; i++) {
+            urls.push(`assets/images/${base}-${i}.${ext}`);
+        }
+        return urls;
+    }
+
+    // Create carousel HTML for a project
+    function createCarousel(images, projectId) {
+        if (!images.length) return `<div class="carousel-container" style="height:220px; background:#eef2f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-image" style="font-size:2rem; color:#9bb7d0;"></i><span style="margin-left:8px;">No images</span></div>`;
+        
+        let slidesHtml = '';
+        images.forEach((img, idx) => {
+            slidesHtml += `<img src="${img}" alt="Screenshot ${idx+1}" onerror="this.src='https://placehold.co/600x400?text=Missing+Image'; this.onerror=null;">`;
+        });
+        
+        return `
+            <div class="carousel-container" data-project="${projectId}">
+                <div class="carousel-slide" style="transform: translateX(0%);">
+                    ${slidesHtml}
+                </div>
+                ${images.length > 1 ? `<button class="carousel-btn prev-btn" data-project="${projectId}"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn" data-project="${projectId}"><i class="fas fa-chevron-right"></i></button>` : ''}
+                <div class="image-counter" data-counter="${projectId}">1 / ${images.length}</div>
+            </div>
+        `;
+    }
+
+    // Store carousel states
+    let carouselStates = {};
+
+    function initCarousel(projectId, totalImages) {
+        if (totalImages <= 1) return;
+        const container = document.querySelector(`.carousel-container[data-project="${projectId}"]`);
+        if (!container) return;
+        const slide = container.querySelector('.carousel-slide');
+        const prevBtn = container.querySelector('.prev-btn');
+        const nextBtn = container.querySelector('.next-btn');
+        const counter = container.querySelector(`.image-counter[data-counter="${projectId}"]`);
+        let currentIndex = 0;
+        
+        const updateCarousel = () => {
+            const width = slide.clientWidth;
+            slide.style.transform = `translateX(-${currentIndex * width}px)`;
+            if (counter) counter.innerText = `${currentIndex+1} / ${totalImages}`;
+        };
+        
+        window.addEventListener('resize', () => updateCarousel());
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            updateCarousel();
+        });
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateCarousel();
+        });
+        
+        // update on image load / resize observer
+        const observer = new ResizeObserver(() => updateCarousel());
+        observer.observe(slide);
+        setTimeout(updateCarousel, 100);
+        carouselStates[projectId] = { currentIndex, updateCarousel };
+    }
+
+    // Lightbox logic
+    function bindLightboxToImages(projectId, images) {
+        const container = document.querySelector(`.carousel-container[data-project="${projectId}"]`);
+        if (!container) return;
+        const slide = container.querySelector('.carousel-slide');
+        const imgElements = slide.querySelectorAll('img');
+        imgElements.forEach((img, idx) => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightboxImg');
+                let currentSrc = images[idx];
+                if (img.src && img.src.startsWith('http')) currentSrc = img.src;
+                lightboxImg.src = currentSrc;
+                lightbox.style.display = 'flex';
+            });
+        });
+    }
+
+    // Render projects grid
+    function renderProjects() {
+        const grid = document.getElementById('projectsGrid');
+        grid.innerHTML = '';
+        projects.forEach((proj, idx) => {
+            const projectId = `proj_${idx}`;
+            const images = getImageUrls(proj.imageBase, proj.imageCount, proj.ext);
+            const carouselHtml = createCarousel(images, projectId);
+            const badgeHtml = proj.badgeText ? `<span class="${proj.badgeClass}">${proj.badgeText}</span>` : '';
+            
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+                ${carouselHtml}
+                <div class="project-content">
+                    <div class="project-title">${proj.title} ${badgeHtml}</div>
+                    <div class="project-desc">${proj.desc}</div>
+                    <div class="tech-stack">${proj.tech}</div>
+                </div>
+            `;
+            grid.appendChild(card);
+            
+            // after DOM append, init carousel and lightbox binding
+            setTimeout(() => {
+                if (images.length > 1) initCarousel(projectId, images.length);
+                bindLightboxToImages(projectId, images);
+            }, 50);
+        });
+    }
+
+    // Close lightbox function
+    window.closeLightbox = function() {
+        document.getElementById('lightbox').style.display = 'none';
+    };
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this || e.target.classList.contains('lightbox-close')) closeLightbox();
+    });
+
+    renderProjects();
+</script>
+</body>
+</html>
